@@ -3,7 +3,7 @@ use orga::Error;
 use std::convert::TryInto;
 use std::time::Duration;
 
-pub const CHAIN_ID: &str = "nomic-stakenet";
+pub const CHAIN_ID: &str = "nomic-stakenet-test";
 pub type App = DefaultPlugins<Nom, InnerApp, CHAIN_ID>;
 
 #[derive(State, Debug, Clone)]
@@ -111,6 +111,10 @@ mod abci {
 
     impl BeginBlock for InnerApp {
         fn begin_block(&mut self, ctx: &BeginBlockCtx) -> Result<()> {
+            if ctx.height == 650 {
+                return Err(Error::App("Halting".into()));
+            }
+
             self.staking.begin_block(ctx)?;
 
             if self.staking.staked()? > 0 {
