@@ -111,10 +111,6 @@ mod abci {
 
     impl BeginBlock for InnerApp {
         fn begin_block(&mut self, ctx: &BeginBlockCtx) -> Result<()> {
-            if ctx.height == 650 {
-                return Err(Error::App("Halting".into()));
-            }
-
             self.staking.begin_block(ctx)?;
 
             if self.staking.staked()? > 0 {
