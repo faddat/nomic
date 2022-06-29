@@ -220,9 +220,8 @@ impl StartCmd {
                 configure_for_statesync(
                     &new_config_path,
                     &[
-                        "http://161.35.51.124:26667",
-                        "http://167.99.119.196:26657",
-                        "https://nomic-rpc.polkachu.com:443",
+                        "http://192.168.1.126:26657",
+                        "http://192.168.1.113:26657",
                     ],
                 );
             }
