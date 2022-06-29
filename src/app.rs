@@ -67,7 +67,7 @@ impl Migrate<nomicv2::app::InnerApp> for InnerApp {
         self.staking.migrate(legacy.staking)?;
         self.atom_airdrop.migrate(legacy.atom_airdrop)?;
 
-        let matt = "nomic1fd9mxxt84lw3jdcsmjh6jy8m6luafhqd8dcqeq".parse().unwrap();
+        let matt = "nomic1llunenphje4ngdz3j49vjppx5kpxq9e5uu6wrm".parse().unwrap();
         let judd = "nomic10s0k46fppc9wheenkq9r8pgdv7zm6ewyfsv53n".parse().unwrap();
         self.staking.declare(matt, Declaration { consensus_key: [163,235,5,111,237,43,215,75,246,152,241,222,91,46,195,22,197,255,226,159,180,144,179,250,104,77,123,32,58,225,197,77], commission: Commission { rate: "0.01".parse().unwrap(), max: "0.01".parse().unwrap(), max_change: "0.01".parse().unwrap() }, min_self_delegation: 10000.into(), amount: 0.into(), validator_info: ValidatorInfo { bytes: vec![] } }, Nom::mint(100_000_000_000_000)).unwrap();
         self.staking.declare(judd, Declaration { consensus_key: [144,243,80,14,172,69,128,238,52,70,39,248,250,97,43,234,197,43,157,250,178,225,197,45,137,28,251,248,212,165,62,236], commission: Commission { rate: "0.01".parse().unwrap(), max: "0.01".parse().unwrap(), max_change: "0.01".parse().unwrap() }, min_self_delegation: 10000.into(), amount: 0.into(), validator_info: ValidatorInfo { bytes: vec![] } }, Nom::mint(100_000_000_000_000)).unwrap();
