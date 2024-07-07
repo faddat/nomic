@@ -6,7 +6,7 @@ edition = "2021"
 default-run = "nomic"
 
 [dependencies]
-bitcoin = { version = "0.32.2", features = ["serde", "rand"] }
+bitcoin = { version = "0.29.2", features = ["serde", "rand"] }
 orga = { git = "https://github.com/oraichain/orga.git", rev = "b8bd07ad3e26849ba78d87355636e96638a78469", features = [
     "merk-verify",
 ] }
