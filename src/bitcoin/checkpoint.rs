@@ -2670,8 +2670,7 @@ mod test {
     #[cfg(feature = "full")]
     use rand::Rng;
 
-    #[cfg(feature = "full")]
-    use crate::bitcoin::threshold_sig::Share;
+    
 
     use super::*;
 
@@ -2945,7 +2944,7 @@ mod test {
             let mut queue = queue.borrow_mut();
             let cp = queue.signing().unwrap().unwrap();
             let sigset_index = cp.sigset.index;
-            let to_sign = cp.to_sign(Xpub::new(xpub.clone())).unwrap();
+            let to_sign = cp.to_sign(Xpub::new(xpub)).unwrap();
             let secp2 = Secp256k1::signing_only();
             let sigs = crate::bitcoin::signer::sign(&secp2, &xpriv, &to_sign).unwrap();
             drop(cp);
@@ -3162,7 +3161,7 @@ mod test {
             let mut queue = queue.borrow_mut();
             let cp = queue.signing().unwrap().unwrap();
             let sigset_index = cp.sigset.index;
-            let to_sign = cp.to_sign(Xpub::new(xpub.clone())).unwrap();
+            let to_sign = cp.to_sign(Xpub::new(xpub)).unwrap();
             let secp2 = Secp256k1::signing_only();
             let sigs = crate::bitcoin::signer::sign(&secp2, &xpriv, &to_sign).unwrap();
             drop(cp);
@@ -3238,7 +3237,7 @@ mod test {
         .into();
 
         sigset.signatories.push(Signatory {
-            pubkey: pubkey.into(),
+            pubkey: pubkey,
             voting_power: 100,
         });
 
@@ -3424,7 +3423,7 @@ mod test {
             let mut queue = queue.borrow_mut();
             let cp = queue.signing().unwrap().unwrap();
             let sigset_index = cp.sigset.index;
-            let to_sign = cp.to_sign(Xpub::new(xpub.clone())).unwrap();
+            let to_sign = cp.to_sign(Xpub::new(xpub)).unwrap();
             let secp2 = Secp256k1::signing_only();
             let sigs = crate::bitcoin::signer::sign(&secp2, &xpriv, &to_sign).unwrap();
             drop(cp);
@@ -3455,7 +3454,7 @@ mod test {
             let mut rng = rand::thread_rng();
             let borrow_queue = queue.borrow();
             let init_array: [u8; 32] = [0; 32];
-            let mut fake_timestamp_commitment = init_array.clone();
+            let mut fake_timestamp_commitment = init_array;
             // Điền mỗi phần tử của mảng với một số ngẫu nhiên từ 0 đến 255
             for i in 0..fake_timestamp_commitment.len() {
                 fake_timestamp_commitment[i] = rng.gen_range(0..=255);
@@ -3577,7 +3576,7 @@ mod test {
             let mut queue = queue.borrow_mut();
             let cp = queue.signing().unwrap().unwrap();
             let sigset_index = cp.sigset.index;
-            let to_sign = cp.to_sign(Xpub::new(xpub.clone())).unwrap();
+            let to_sign = cp.to_sign(Xpub::new(xpub)).unwrap();
             let secp2 = Secp256k1::signing_only();
             let sigs = crate::bitcoin::signer::sign(&secp2, &xpriv, &to_sign).unwrap();
             drop(cp);
@@ -3615,18 +3614,18 @@ mod test {
         {
             let is_should_push = queue
                 .borrow_mut()
-                .should_push(&sig_keys, &vec![0], 8)
+                .should_push(&sig_keys, &[0], 8)
                 .unwrap();
-            assert_eq!(is_should_push, true);
+            assert!(is_should_push);
         }
         // we accept input = output + fees
         push_withdraw(99_988_350);
         {
             let is_should_push = queue
                 .borrow_mut()
-                .should_push(&sig_keys, &vec![0], 8)
+                .should_push(&sig_keys, &[0], 8)
                 .unwrap();
-            assert_eq!(is_should_push, false);
+            assert!(!is_should_push);
         }
         push_deposit(30_000_000);
         maybe_step(8);
@@ -3649,9 +3648,9 @@ mod test {
         {
             let is_should_push = queue
                 .borrow_mut()
-                .should_push(&sig_keys, &vec![0], 9)
+                .should_push(&sig_keys, &[0], 9)
                 .unwrap();
-            assert_eq!(is_should_push, false);
+            assert!(!is_should_push);
         }
     }
 }

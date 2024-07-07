@@ -1389,7 +1389,7 @@ mod tests {
             Rc::new(RefCell::new(Some(EntryMap::new()))),
             Rc::new(RefCell::new(Some(Map::new()))),
         );
-        let addr = vec![Address::from_pubkey([0; 33]), Address::from_pubkey([1; 33])];
+        let addr = [Address::from_pubkey([0; 33]), Address::from_pubkey([1; 33])];
         vals.set_voting_power([0; 32], 100);
         vals.set_operator([0; 32], addr[0])?;
         vals.set_voting_power([1; 32], 10);
@@ -1407,10 +1407,8 @@ mod tests {
         let btc = Rc::new(RefCell::new(Bitcoin::default()));
         let secp = Secp256k1::new();
         let network = btc.borrow().network();
-        let xpriv = vec![
-            ExtendedPrivKey::new_master(network, &[0]).unwrap(),
-            ExtendedPrivKey::new_master(network, &[1]).unwrap(),
-        ];
+        let xpriv = [ExtendedPrivKey::new_master(network, &[0]).unwrap(),
+            ExtendedPrivKey::new_master(network, &[1]).unwrap()];
         let xpub = vec![
             ExtendedPubKey::from_priv(&secp, &xpriv[0]),
             ExtendedPubKey::from_priv(&secp, &xpriv[1]),
@@ -1567,7 +1565,7 @@ mod tests {
             Rc::new(RefCell::new(Some(EntryMap::new()))),
             Rc::new(RefCell::new(Some(Map::new()))),
         );
-        let addr = vec![Address::from_pubkey([0; 33]), Address::from_pubkey([1; 33])];
+        let addr = [Address::from_pubkey([0; 33]), Address::from_pubkey([1; 33])];
         vals.set_voting_power([0; 32], 100);
         vals.set_operator([0; 32], addr[0])?;
         vals.set_voting_power([1; 32], 10);
@@ -1585,10 +1583,8 @@ mod tests {
         let btc = Rc::new(RefCell::new(Bitcoin::default()));
         let secp = Secp256k1::new();
         let network = btc.borrow().network();
-        let xpriv = vec![
-            ExtendedPrivKey::new_master(network, &[0]).unwrap(),
-            ExtendedPrivKey::new_master(network, &[1]).unwrap(),
-        ];
+        let xpriv = [ExtendedPrivKey::new_master(network, &[0]).unwrap(),
+            ExtendedPrivKey::new_master(network, &[1]).unwrap()];
         let xpub = vec![
             ExtendedPubKey::from_priv(&secp, &xpriv[0]),
             ExtendedPubKey::from_priv(&secp, &xpriv[1]),

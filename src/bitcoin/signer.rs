@@ -535,7 +535,7 @@ mod test {
         )
         .unwrap();
 
-        assert!(signer.xprivs.get(0).unwrap() == &xpriv);
+        assert!(signer.xprivs.first().unwrap() == &xpriv);
     }
 
     #[test]
@@ -561,7 +561,7 @@ mod test {
         )
         .unwrap();
         assert!(signer.xprivs.len() == 1);
-        assert!(signer.xprivs.get(0).unwrap() == &xpriv);
+        assert!(signer.xprivs.first().unwrap() == &xpriv);
     }
 
     #[test]

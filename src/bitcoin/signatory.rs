@@ -619,8 +619,9 @@ mod tests {
     use super::SignatorySet;
 
     fn mock_signatory_set() -> SignatorySet {
-        let pk = |bytes| Pubkey::new(bytes).unwrap().into();
-        let sigsets = SignatorySet {
+        let pk = |bytes| Pubkey::new(bytes).unwrap();
+        
+        SignatorySet {
             create_time: 0,
             present_vp: 12000,
             possible_vp: 12000,
@@ -648,8 +649,7 @@ mod tests {
                     ]),
                 },
             ],
-        };
-        sigsets
+        }
     }
 
     #[test]
@@ -663,7 +663,7 @@ mod tests {
             (2, 3),
         );
 
-        let into_script_result: Result<Script> = script.into();
+        let into_script_result: Result<Script> = script;
         let final_script = into_script_result.unwrap();
         let script_gen_by_js_lib = [
             33, 3, 144, 133, 164, 227, 11, 15, 32, 57, 222, 17, 218, 214, 79, 52, 149, 38, 2, 111,
@@ -705,7 +705,7 @@ mod tests {
 
         let (sigset, commitment) = SignatorySet::from_script(&script, (2, 3)).unwrap();
 
-        let pk = |bytes| Pubkey::new(bytes).unwrap().into();
+        let pk = |bytes| Pubkey::new(bytes).unwrap();
         assert_eq!(
             sigset,
             SignatorySet {
