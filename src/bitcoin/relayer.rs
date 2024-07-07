@@ -659,7 +659,7 @@ impl Relayer {
                     Err(err) => Err(err)?,
                 }
 
-                if already_execute == true {
+                if already_execute {
                     relayed.insert(signed_tx.tx.txid());
                     info!(
                         "The recovery tx {} is already executed on the Bitcoin Network...",
